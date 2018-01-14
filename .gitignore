@@ -1,2 +1,5 @@
 #phpStorm files
 .idea
+
+#MacOS files
+.DS*

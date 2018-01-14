@@ -2,7 +2,7 @@
 
 return array(
 	'host' => 'localhost',
-	'dbname' => 'beejee-tasks',
+	'dbname' => 'camagru',
 	'user' => 'root',
-	'password' => '',
+	'password' => '123456',
 );
