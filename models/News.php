@@ -34,7 +34,7 @@ class News
 		$db = DBConnection::getConnection();
 
 		$newsList = array();
-
+/*
 		$result = $db->query('SELECT id_news, article, text
 			FROM News');
 
@@ -45,7 +45,7 @@ class News
 			$newsList[$i]['text'] = $row['text'];
 			$i++;
 		}
-
+*/
 		return $newsList;
 	}	
 
