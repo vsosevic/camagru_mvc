@@ -7,7 +7,7 @@
 </head>
 
 <body>
-<?php session_start(); ?>
+<?php //session_start(); ?>
 
 <header class="header-menu">
     <a class="header-item" href="my-camagru">myCamagru</a>
