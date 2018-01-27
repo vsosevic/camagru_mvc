@@ -11,8 +11,8 @@ class GalleryController
 	{
 		require_once(ROOT . '/views/gallery/index.php');
 
-		$test = DBConnection::getConnection();
-		$q = $test->exec('SELECT * FROM users WHERE true', PDO::FETCH_ASSOC);
+		$db = DBConnection::getConnection();
+		$q = $db->query('SELECT * FROM users')->fetchAll();
 		return true;
 	}
 

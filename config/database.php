@@ -6,8 +6,8 @@
 //$DB_PASSWORD = '';
 //
 return array(
-	'host' => '127.0.0.1',
+	'host' => 'localhost',
 	'dbname' => 'camagru',
 	'user' => 'root',
-	'password' => '',
+	'password' => '123456',
 );
