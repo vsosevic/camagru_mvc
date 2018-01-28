@@ -1,6 +1,5 @@
 <?php
 ini_set('display_errors', 1);
-//define( 'K_PRETTY_URLS', 1 );
 
 error_reporting(E_ALL);
 
@@ -11,5 +10,3 @@ include_once (ROOT . '/views/layouts/header.php');
 $router = new Router;
 $router->run();
 include_once (ROOT . '/views/layouts/footer.php');
-
-?>

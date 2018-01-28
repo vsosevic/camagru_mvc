@@ -13,6 +13,8 @@ class GalleryController
 
 		$db = DBConnection::getConnection();
 		$q = $db->query('SELECT * FROM users')->fetchAll();
+		print_r($q);
+
 		return true;
 	}
 
