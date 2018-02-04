@@ -12,10 +12,11 @@
 <header class="header-menu">
     <a class="header-item" href="my-camagru">myCamagru</a>
     <a class="header-item" href="gallery">Gallery</a>
-    <?php if (isset($_SESSION) && !empty($_SESSION['logged'])) {?>
-        <a class="header-item-login-logout" href="logout">Logout</a><?php }
-    else { ?>
+    <?php if (isset($_SESSION) && !empty($_SESSION['logged'])): ?>
+        <a class="header-item header-item-login-logout" href="settings">Account settings</a>
+        <a class="header-item-login-logout" href="logout">Logout</a>
+    <?php else: ?>
         <a class="header-item header-item-login-logout" href="login">Login</a>
-        <a class="header-item header-item-login-logout" href="signup">SignUp</a><?php }
-    ?>
+        <a class="header-item header-item-login-logout" href="signup">SignUp</a>
+    <?php endif; ?>
 </header>

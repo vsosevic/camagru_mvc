@@ -3,7 +3,7 @@
 /**
 * 
 */
-class News
+class Gallery
 {
 
 	function __construct()
