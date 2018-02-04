@@ -35,9 +35,22 @@ class User
         return false;
     }
 
-    public static function password_correct($pwd) {
+    public static function password_is_complex($pwd) {
+        if (strlen($pwd) < 8 ||
+            !preg_match("#[0-9]+#", $pwd) ||
+            !preg_match("#[a-zA-Z]+#", $pwd)) {
 
+            return false;
+
+        }
         return true;
+    }
+
+    public static function string_delete_db_injection($str) {
+        $invalid_characters = array("$", "%", "#", "<", ">", "|");
+        $str = str_replace($invalid_characters, "", $str);
+
+        return $str;
     }
 
 

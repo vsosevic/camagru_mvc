@@ -6,7 +6,7 @@
     <br />
     <input type="password" name="password" placeholder="Enter Password" value="" required />
     <br />
-    <input type="password" name="password-again" placeholder="Password again" value="" required />
+    <input type="password" name="password-repeat" placeholder="Repeat Password" value="" required />
     <br />
     <input class="login" type="submit" name="submit" value="Subscribe" />
     <br />
