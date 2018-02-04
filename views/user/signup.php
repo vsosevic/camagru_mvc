@@ -10,9 +10,9 @@
     <br />
     <input class="login" type="submit" name="submit" value="Subscribe" />
     <br />
-    <?php if (isset($errmsg)): ?>
+    <?php if (!empty($errmsg)): ?>
         <div class="errmsg"><?php echo $errmsg; ?></div>
-    <?php endif; if (isset($message)): ?>
+    <?php endif; if (!empty($message)): ?>
         <div class="message"><?php  echo $message; ?></div>
     <?php endif; ?>
 </form>
