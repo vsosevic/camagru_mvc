@@ -80,7 +80,15 @@ class UserController
 
     public function actionLogin()
     {
+
+//        $_SESSION['logged'] = true;
         require_once(ROOT . '/views/user/login.php');
+
+        return true;
+    }
+
+    public function actionLogout() {
+        unset($_SESSION['logged']);
 
         return true;
     }
