@@ -38,8 +38,8 @@ class UserController
 
             if (empty($errmsg)) {
                 $db = DBConnection::getConnection();
-                $validation_key = md5('42' + $email);
-                $validation_link = $_SERVER['HTTP_ORIGIN'] . "/validate/$validation_key";
+                $validation_key = md5('42' . $email);
+                $validation_link = $_SERVER['HTTP_ORIGIN'] . "/validate?key=$validation_key";
                 $mailSubject = "Signing up to camagru - validate your account!";
                 $mailBody = "Hi, $username!\n\n To validate your account click the following link: $validation_link";
                 if (mail($email, $mailSubject, $mailBody)) {
@@ -54,6 +54,26 @@ class UserController
         }
 
         require_once(ROOT . '/views/user/signup.php');
+
+        return true;
+    }
+
+    public function actionValidate($validation_key = NULL) {
+        if (!empty($validation_key)) {
+            $db = DBConnection::getConnection();
+            $q = $db->prepare("SELECT * FROM users WHERE md5(concat(\"42\", email))=?");
+            $q->execute(array($validation_key));
+            $user = $q->fetch(PDO::FETCH_OBJ);
+
+            if (isset($user->email)) {
+                $email = "'" . $user->email . "'";
+                $db->query("UPDATE users SET active=1 WHERE email=$email");
+            }
+            require_once(ROOT . '/views/user/validate.php');
+        }
+        else {
+            //redirect home or message smth
+        }
 
         return true;
     }
