@@ -105,8 +105,9 @@ class UserController
 
     public function actionLogout() {
         session_destroy();
-        require_once(ROOT . '/views/user/logout.php');
-//        header('location: /login');
+
+        // redirects to the /login page with using s JS.
+        echo '<script>window.location="/login"</script>';
 
         return true;
     }
