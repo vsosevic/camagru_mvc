@@ -4,6 +4,8 @@ return array(
     'gallery' => 'gallery/index', //actionIndex in GalleryController
     'my-camagru' => 'user/index', //actionIndex in UserController
     'signup' => 'user/signup', //actionSignup in UserController
+    'validate/(\w+)' => 'user/validate/$1', //actionValidate in UserController
+    'validate' => 'user/validate', //actionValidate in UserController
     'login' => 'user/login', //actionLogin in UserController
     'settings' => 'user/settings', //actionSettings in UserController
     'news/([0-9]+)' => 'news/view/$1', //actionView in NewsController
