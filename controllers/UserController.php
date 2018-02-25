@@ -80,15 +80,33 @@ class UserController
 
     public function actionLogin()
     {
+        if (!empty($_POST['username']) && !empty($_POST['password'])) {
+            $user = new User($_POST['username']);
+            $pwd = $_POST['password'];
 
-//        $_SESSION['logged'] = true;
+            if ($user->username && $user->password_correct($pwd)) {
+                if ($user->active) {
+                    $_SESSION['logged'] = $user->username;
+
+                }
+                else {
+                    $err_msg = "This account isn't activated yet. Check your email and activate again";
+                }
+            }
+            else {
+                $err_msg = "Incorrect username or password!";
+            }
+        }
+
         require_once(ROOT . '/views/user/login.php');
 
         return true;
     }
 
     public function actionLogout() {
-        unset($_SESSION['logged']);
+        session_destroy();
+        require_once(ROOT . '/views/user/logout.php');
+//        header('location: /login');
 
         return true;
     }

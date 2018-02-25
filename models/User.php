@@ -5,6 +5,9 @@
 */
 class User
 {
+    public $email;
+    public $username;
+    public $active;
 
     public static function username_occupied($username) {
 
@@ -53,10 +56,38 @@ class User
         return $str;
     }
 
+    public function password_correct($password) {
+        $db = DBConnection::getConnection();
+        $password_hashed =  hash('whirlpool', $password);
+
+        $q = $db->prepare('SELECT * FROM users WHERE username=? and password=?');
+        $q->execute(array($this->username, $password_hashed));
+        $row = $q->fetch(PDO::FETCH_OBJ);
+
+        if (!empty($row) && $this->username == $row->username) {
+            return true;
+        }
+
+        return false;
+    }
 
 
-	function __construct()
+
+	function __construct($username)
 	{
-		# code...
+	    $db = DBConnection::getConnection();
+	    $username = self::string_delete_db_injection($username);
+	    $q = $db->prepare('SELECT * FROM users WHERE username=?');
+	    $q->execute(array($username));
+	    $row = $q->fetch(PDO::FETCH_OBJ);
+
+	    if (!empty($row)) {
+            $this->username = $row->username;
+            $this->email = $row->email;
+            $this->active = $row->active;
+        }
+        else {
+	        unset($this);
+        }
 	}
 }

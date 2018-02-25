@@ -1,4 +1,4 @@
-<form method="post" style="align-content: center;" action="login.php">
+<form method="post" style="align-content: center;" action="/login">
     <h2>Login</h2>
     <input name="username" placeholder="User name" value="" autofocus />
     <br />
@@ -8,5 +8,13 @@
     <br />
     <a href="/forgot" style="font-size: 12px;">Forgot password?</a>
     <br />
-<!--    <div class="errmsg"></div>-->
+    <?php if (isset($err_msg)): ?>
+        <div class="errmsg">
+            <?php echo $err_msg; ?>
+        </div>
+    <?php elseif(isset($_SESSION['logged'])): ?>
+        <script type="text/javascript">
+            window.location.href = '/my-camagru';
+        </script>
+    <?php endif; ?>
 </form>
