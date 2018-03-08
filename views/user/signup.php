@@ -1,6 +1,6 @@
 <form method="post" style="align-content: center;" action="signup">
     <h2>SignUp</h2>
-    <input type="text" name="username" placeholder="User Name" value="<?PHP if (isset($_POST['name'])) { echo $_POST['name']; } ?>" required />
+    <input type="text" name="username" placeholder="User Name" value="<?PHP if (isset($_POST['username'])) { echo $_POST['username']; } ?>" required />
     <br />
     <input type="email" name="email" placeholder="Email" value="<?PHP if (isset($_POST['email'])) { echo $_POST['email']; } ?>" required />
     <br />

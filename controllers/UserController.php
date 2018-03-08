@@ -25,9 +25,11 @@ class UserController
 
             if (User::username_occupied($username)) {
                 $errmsg .= 'This usernmae is occupied!<br>';
+                unset($_POST['username']);
             }
             if (User::email_occupied($email)) {
                 $errmsg .= 'This email is occupied!<br>';
+                unset($_POST['email']);
             }
             if ($_POST['password'] !== $_POST['password-repeat']) {
                 $errmsg .= 'Passwords do not match!<br>';
@@ -50,9 +52,7 @@ class UserController
                     $errmsg .= "Sign up failed! Some error with sending email to your address. Try again later.";
                 }
             }
-
         }
-
         require_once(ROOT . '/views/user/signup.php');
 
         return true;
@@ -69,10 +69,10 @@ class UserController
                 $email = "'" . $user->email . "'";
                 $db->query("UPDATE users SET active=1 WHERE email=$email");
             }
+            else {
+                $errmsg = "Invalid validation key!";
+            }
             require_once(ROOT . '/views/user/validate.php');
-        }
-        else {
-            //redirect home or message smth
         }
 
         return true;
