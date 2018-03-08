@@ -7,6 +7,8 @@ return array(
     'validate/(\w+)' => 'user/validate/$1', //actionValidate in UserController
     'validate' => 'user/validate', //actionValidate in UserController
     'login' => 'user/login', //actionLogin in UserController
+    'forgot-reset' => 'user/forgotReset', //actionForgotReset in UserController
+    'forgot' => 'user/forgot', //actionForgot in UserController
     'logout' => 'user/logout', //actionLogin in UserController
     'settings' => 'user/settings', //actionSettings in UserController
     'news/([0-9]+)' => 'news/view/$1', //actionView in NewsController

@@ -39,6 +39,7 @@ class User
     }
 
     public static function password_is_complex($pwd) {
+//        return true;
         if (strlen($pwd) < 8 ||
             !preg_match("#[0-9]+#", $pwd) ||
             !preg_match("#[a-zA-Z]+#", $pwd)) {
@@ -51,6 +52,13 @@ class User
 
     public static function string_delete_db_injection($str) {
         $invalid_characters = array("$", "%", "#", "<", ">", "|");
+        $str = str_replace($invalid_characters, "", $str);
+
+        return $str;
+    }
+
+    public static function string_delete_php_injection($str) {
+        $invalid_characters = array(";", "(", ")", "{", "}", '"', "'", '$');
         $str = str_replace($invalid_characters, "", $str);
 
         return $str;
@@ -71,7 +79,29 @@ class User
         return false;
     }
 
+    public static function generate_reset_key($email) {
+        $reset_key = md5('42' . $email); // change hardcoded salt '42' to the constant or smth in the future.
 
+        return $reset_key;
+    }
+
+    public static function change_password_by_reset_key($new_password, $reset_key) {
+        $reset_key = self::string_delete_db_injection($reset_key);
+
+        $db = DBConnection::getConnection();
+        $q = $db->prepare("SELECT * FROM users WHERE md5(concat(\"42\", email))=:reset_key"); // change hardcoded salt '42' to the constant or smth in the future.
+        $q->execute(array(':reset_key' => $reset_key));
+        $user = $q->fetch(PDO::FETCH_OBJ);
+
+        if (isset($user->email)) {
+            $email = $user->email;
+            $hashed_passwrod = hash('whirlpool', $new_password);
+            $db->query("UPDATE users SET password='$hashed_passwrod' WHERE email='$email'");
+            return true;
+        }
+
+        return false;
+    }
 
 	function __construct($username)
 	{

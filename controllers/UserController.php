@@ -34,18 +34,18 @@ class UserController
             if ($_POST['password'] !== $_POST['password-repeat']) {
                 $errmsg .= 'Passwords do not match!<br>';
             }
-//            else if (!User::password_is_complex($_POST['password'])) {
-//                $errmsg .= 'Password should be at least 8 characters long, has 1 number and 1 character.';
-//            }
+            else if (!User::password_is_complex($_POST['password'])) {
+                $errmsg .= 'Password should be at least 8 characters long, has 1 number and 1 character.';
+            }
 
             if (empty($errmsg)) {
                 $db = DBConnection::getConnection();
                 $validation_key = md5('42' . $email);
-                $validation_link = $_SERVER['HTTP_ORIGIN'] . "/validate?key=$validation_key";
+                $validation_link = $_SERVER['HTTP_ORIGIN'] . "/validate/$validation_key";
                 $mailSubject = "Signing up to camagru - validate your account!";
                 $mailBody = "Hi, $username!\n\n To validate your account click the following link: $validation_link";
                 if (mail($email, $mailSubject, $mailBody)) {
-                    $db->query("INSERT INTO users(username,email,password) VALUES('".$username."','".$email."','".hash('whirlpool', $_POST['password'])."')");
+                    $db->query("INSERT INTO users(username,email,password) VALUES('$username','$email','".hash('whirlpool', $_POST['password'])."')");
                     $message = "Signup Sucessfully! To finish registration check your email!";
                 }
                 else {
@@ -103,6 +103,37 @@ class UserController
         return true;
     }
 
+    public function actionForgot() {
+        require_once(ROOT . '/views/user/forgot.php');
+    }
+
+    public function actionForgotReset() {
+        if (isset($_POST['email'])) {
+            $reset_key = User::generate_reset_key($_POST['email']);
+
+            $email = User::string_delete_php_injection($_POST['email']);
+            $mailSubject = "Camagru - reset password.";
+            $mailBody = "You have requested to reset your password to your account. Your reset key: $reset_key";
+            if (mail($email, $mailSubject, $mailBody)) {
+                $message = "Check you email to enter reset key here.";
+            }
+            else {
+                $errmsg = "Some error occurred with sending email to your address. Try again later or contact admin";
+            }
+        }
+        if (isset($_POST['new-password']) && isset($_POST['reset-key'])) {
+            if (User::password_is_complex($_POST['new-password'])) {
+                User::change_password_by_reset_key($_POST['new-password'], $_POST['reset-key']);
+                $message = "Password changed successfully. Now you can try to <a href='login'>Login</a>";
+            }
+            else {
+                $errmsg = "Password should be at least 8 characters long, has 1 number and 1 character.";
+            }
+        }
+
+        require_once(ROOT . '/views/user/forgot-reset.php');
+    }
+
     public function actionLogout() {
         session_destroy();
 
@@ -119,8 +150,4 @@ class UserController
         return true;
     }
 
-	function __construct()
-	{
-		# code...
-	}
 }
