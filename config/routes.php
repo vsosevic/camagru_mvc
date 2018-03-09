@@ -7,6 +7,7 @@ return array(
     'validate/(\w+)' => 'user/validate/$1', //actionValidate in UserController
     'validate' => 'user/validate', //actionValidate in UserController
     'login' => 'user/login', //actionLogin in UserController
+    'forgot-reset/(\w+)' => 'user/forgotReset/$1', //actionForgotReset in UserController
     'forgot-reset' => 'user/forgotReset', //actionForgotReset in UserController
     'forgot' => 'user/forgot', //actionForgot in UserController
     'logout' => 'user/logout', //actionLogin in UserController

@@ -8,6 +8,7 @@ class User
     public $email;
     public $username;
     public $active;
+    public $receive_notifications;
 
     public static function username_occupied($username) {
 
@@ -115,6 +116,7 @@ class User
             $this->username = $row->username;
             $this->email = $row->email;
             $this->active = $row->active;
+            $this->receive_notifications = $row->receive_notifications;
         }
         else {
 	        unset($this);

@@ -107,7 +107,7 @@ class UserController
         require_once(ROOT . '/views/user/forgot.php');
     }
 
-    public function actionForgotReset() {
+    public function actionForgotReset($email = NULL) {
         if (isset($_POST['email'])) {
             $reset_key = User::generate_reset_key($_POST['email']);
 
@@ -145,6 +145,8 @@ class UserController
 
     public function actionSettings()
     {
+        $user = new User($_SESSION['logged']);
+
         require_once(ROOT . '/views/user/settings.php');
 
         return true;
