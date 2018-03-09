@@ -13,7 +13,7 @@
     <span>Email:</span> <br>
     <input type="email" name="email" placeholder="Email" value="<?PHP if (isset($user->email)) { echo $user->email; } ?>" required />
     <br />
-    <input type="checkbox" name="receive-notifications" checked> Receive notifications <br>
+    <input type="checkbox" name="receive-notifications" <?php if ($user->receive_notifications) { echo 'checked'; }; ?> > Receive notifications <br>
     <br />
     <p>To change password go <a href="forgot-reset/<?php echo $user->email ?>">here</a> </p>
     <br />
