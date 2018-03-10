@@ -108,14 +108,17 @@ class UserController
     }
 
     public function actionForgotReset($email = NULL) {
-        if (isset($_POST['email'])) {
-            $reset_key = User::generate_reset_key($_POST['email']);
+        if (isset($_POST['email']) || $email !== NULL) {
 
-            $email = User::string_delete_php_injection($_POST['email']);
+            if (isset($_POST['email'])) {
+                $email = User::string_delete_php_injection($_POST['email']);
+            }
+
+            $reset_key = User::generate_reset_key($email);
             $mailSubject = "Camagru - reset password.";
             $mailBody = "You have requested to reset your password to your account. Your reset key: $reset_key";
             if (mail($email, $mailSubject, $mailBody)) {
-                $message = "Check you email to enter reset key here.";
+                $message = "Check your email to enter reset key here.";
             }
             else {
                 $errmsg = "Some error occurred with sending email to your address. Try again later or contact admin";
@@ -124,7 +127,8 @@ class UserController
         if (isset($_POST['new-password']) && isset($_POST['reset-key'])) {
             if (User::password_is_complex($_POST['new-password'])) {
                 User::change_password_by_reset_key($_POST['new-password'], $_POST['reset-key']);
-                $message = "Password changed successfully. Now you can try to <a href='login'>Login</a>";
+                $message = "Password changed successfully!";
+                $message .= empty($_SESSION['logged']) ?  "Now you can try to <a href='/login'>Login</a>" : '';
             }
             else {
                 $errmsg = "Password should be at least 8 characters long, has 1 number and 1 character.";

@@ -1,4 +1,4 @@
-<form class="form-forgot" method="POST" action="forgot-reset">
+<form class="form-forgot" method="POST" action="/forgot-reset">
     <h2 class="form-forgot-heading">Password reset</h2>
     <?php if (!empty($message)) : ?>
         <div class="message">
