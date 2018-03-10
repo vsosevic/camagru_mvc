@@ -151,7 +151,6 @@ class UserController
 
     public function actionSettings()
     {
-        // !!!!!!! make email and username check.
         if (!empty($_POST['email']) && !empty($_POST['username'])) {
             $db = DBConnection::getConnection();
 
@@ -159,8 +158,38 @@ class UserController
             $username = User::string_delete_db_injection($_POST['username']);
             $email = User::string_delete_db_injection($_POST['email']);
             $receive_notifications = isset($_POST['receive-notifications']) ? 1 : 0;
+            $errmsg = '';
+            $message = '';
 
-            $db->query("UPDATE users SET username='$username',email='$email',receive_notifications='$receive_notifications' WHERE id_user=$id_user");
+            $old_user = new User($id_user);
+
+            if ($old_user->email == $email) { // no changes made
+                // do nothing
+            }
+            else if (!User::email_occupied($email)) {
+                $db->query("UPDATE users SET email='$email' WHERE id_user=$id_user");
+                $message .= "Email changed successfully! <br>";
+            }
+            else {
+                $errmsg .= "This email is occupied! <br>";
+            }
+
+            if ($old_user->username == $username) { // no changes made
+                //do nothing
+            }
+            else if (!User::username_occupied($username)) {
+                $db->query("UPDATE users SET username='$username' WHERE id_user=$id_user");
+                $message .= "Username changed successfully! <br>";
+            }
+            else {
+                $errmsg .= "This username is occupied! <br>";
+            }
+
+            if ($old_user->receive_notifications != $receive_notifications) {
+                $db->query("UPDATE users SET receive_notifications='$receive_notifications' WHERE id_user=$id_user");
+                $message .= "Settings were saved!";
+            }
+
         }
 
         $user = new User($_SESSION['logged_id_user']);
