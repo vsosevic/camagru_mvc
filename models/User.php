@@ -11,6 +11,26 @@ class User
     public $active;
     public $receive_notifications;
 
+    function __construct($id_user)
+    {
+        $db = DBConnection::getConnection();
+        $id_user = (int) $id_user;
+        $q = $db->prepare('SELECT * FROM users WHERE id_user=?');
+        $q->execute(array($id_user));
+        $row = $q->fetch(PDO::FETCH_OBJ);
+
+        if (!empty($row)) {
+            $this->username = $row->username;
+            $this->email = $row->email;
+            $this->active = $row->active;
+            $this->receive_notifications = $row->receive_notifications;
+            $this->id_user = $row->id_user;
+        }
+        else {
+            unset($this);
+        }
+    }
+
     public static function username_occupied($username) {
 
         $db = DBConnection::getConnection();
@@ -41,7 +61,7 @@ class User
     }
 
     public static function password_is_complex($pwd) {
-//        return true;
+//        return true; // work around to get rid of entering complex passwords.
         if (strlen($pwd) < 8 ||
             !preg_match("#[0-9]+#", $pwd) ||
             !preg_match("#[a-zA-Z]+#", $pwd)) {
@@ -105,24 +125,20 @@ class User
         return false;
     }
 
-    // !!!!!!! change SESSION to save only id_user. !!!!!!!!!
-	function __construct($username)
-	{
-	    $db = DBConnection::getConnection();
-	    $username = self::string_delete_db_injection($username);
-	    $q = $db->prepare('SELECT * FROM users WHERE username=?');
-	    $q->execute(array($username));
-	    $row = $q->fetch(PDO::FETCH_OBJ);
+    public static function get_user_id_by_username($username) {
+        $db = DBConnection::getConnection();
+        $username = self::string_delete_db_injection($username);
 
-	    if (!empty($row)) {
-            $this->username = $row->username;
-            $this->email = $row->email;
-            $this->active = $row->active;
-            $this->receive_notifications = $row->receive_notifications;
-            $this->id_user = $row->id_user;
+        $q = $db->prepare('SELECT * FROM users WHERE username=?');
+        $q->execute(array($username));
+        $row = $q->fetch(PDO::FETCH_OBJ);
+
+        if (!empty($row->id_user)) {
+            return $row->id_user;
         }
         else {
-	        unset($this);
+            return false;
         }
-	}
+    }
+
 }

@@ -81,12 +81,14 @@ class UserController
     public function actionLogin()
     {
         if (!empty($_POST['username']) && !empty($_POST['password'])) {
-            $user = new User($_POST['username']);
+
+            $id_user = User::get_user_id_by_username($_POST['username']);
+
+            $user = new User($id_user);
             $pwd = $_POST['password'];
 
             if ($user->username && $user->password_correct($pwd)) {
                 if ($user->active) {
-                    $_SESSION['logged'] = $user->username;
                     $_SESSION['logged_id_user'] = $user->id_user;
                 }
                 else {
@@ -159,12 +161,9 @@ class UserController
             $receive_notifications = isset($_POST['receive-notifications']) ? 1 : 0;
 
             $db->query("UPDATE users SET username='$username',email='$email',receive_notifications='$receive_notifications' WHERE id_user=$id_user");
-
-            // change SESSION to save only id_user.  !!!!!!!!!
-            $_SESSION['logged'] = $username;
         }
 
-        $user = new User($_SESSION['logged']);
+        $user = new User($_SESSION['logged_id_user']);
 
         require_once(ROOT . '/views/user/settings.php');
 
