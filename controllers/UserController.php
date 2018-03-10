@@ -87,7 +87,7 @@ class UserController
             if ($user->username && $user->password_correct($pwd)) {
                 if ($user->active) {
                     $_SESSION['logged'] = $user->username;
-
+                    $_SESSION['logged_id_user'] = $user->id_user;
                 }
                 else {
                     $err_msg = "This account isn't activated yet. Check your email and activate again";
@@ -149,6 +149,21 @@ class UserController
 
     public function actionSettings()
     {
+        // !!!!!!! make email and username check.
+        if (!empty($_POST['email']) && !empty($_POST['username'])) {
+            $db = DBConnection::getConnection();
+
+            $id_user = $_SESSION['logged_id_user'];
+            $username = User::string_delete_db_injection($_POST['username']);
+            $email = User::string_delete_db_injection($_POST['email']);
+            $receive_notifications = isset($_POST['receive-notifications']) ? 1 : 0;
+
+            $db->query("UPDATE users SET username='$username',email='$email',receive_notifications='$receive_notifications' WHERE id_user=$id_user");
+
+            // change SESSION to save only id_user.  !!!!!!!!!
+            $_SESSION['logged'] = $username;
+        }
+
         $user = new User($_SESSION['logged']);
 
         require_once(ROOT . '/views/user/settings.php');

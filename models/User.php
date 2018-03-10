@@ -5,6 +5,7 @@
 */
 class User
 {
+    public $id_user;
     public $email;
     public $username;
     public $active;
@@ -104,6 +105,7 @@ class User
         return false;
     }
 
+    // !!!!!!! change SESSION to save only id_user. !!!!!!!!!
 	function __construct($username)
 	{
 	    $db = DBConnection::getConnection();
@@ -117,6 +119,7 @@ class User
             $this->email = $row->email;
             $this->active = $row->active;
             $this->receive_notifications = $row->receive_notifications;
+            $this->id_user = $row->id_user;
         }
         else {
 	        unset($this);

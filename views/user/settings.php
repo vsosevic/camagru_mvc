@@ -7,12 +7,10 @@
 <form method="post" action="settings">
     <h2>Settings</h2>
 
-    <span>Username:</span> <br>
     <label for="username">Username</label>
     <input type="text" name="username" placeholder="User Name" value="<?PHP if (isset($user->username)) { echo $user->username; } ?>" required />
     <br />
 
-    <span>Email:</span> <br>
     <label for="email">Email</label>
     <input type="email" name="email" placeholder="Email" value="<?PHP if (isset($user->email)) { echo $user->email; } ?>" required />
     <br />
