@@ -7,10 +7,11 @@ include_once ROOT . '/models/Gallery.php';
 */
 class GalleryController
 {
+    private $db;
 
 	function __construct()
 	{
-		# code...
+		$this->db = DBConnection::getConnection();
 	}
 
     public function actionIndex()
@@ -22,6 +23,16 @@ class GalleryController
         include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
+    }
+
+    public function actionImage($id_image) {
+	    if (!empty($id_image)) {
+            $image = $this->db->query("SELECT * FROM images WHERE id_image=$id_image")->fetchObject();
+        }
+
+        include_once (ROOT . '/views/layouts/header.php');
+        require_once(ROOT . '/views/gallery/image.php');
+        include_once (ROOT . '/views/layouts/footer.php');
     }
 
     public function actionSaveImage() {
@@ -38,9 +49,9 @@ class GalleryController
         $id_user = $_SESSION['logged_id_user'];
         $success = file_put_contents($imagePath, $image);
         if ($success) {
-            $db->query("INSERT INTO images(id_user, image_path) VALUES('$id_user','$imagePath')");
+            $db->query("INSERT INTO images(id_user, image_path) VALUES('$id_user','/$imagePath')");
         }
-        $saved_image = $db->query("SELECT id_image FROM images WHERE image_path='$imagePath'")->fetchObject();
+        $saved_image = $db->query("SELECT id_image FROM images WHERE image_path='/$imagePath'")->fetchObject();
         $json_response = array('imagePath' => $imagePath, 'imageID' => $saved_image->id_image);
         print(json_encode($json_response));
     }
