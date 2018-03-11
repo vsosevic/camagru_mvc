@@ -52,7 +52,7 @@ window.onload = function() {
 	// });
 }
 function changeFrame(frame) {
-	document.getElementById('frame').src="images/" + frame + ".png";// Trigger photo take
+	document.getElementById('frame').src="files/sources/" + frame + ".png";// Trigger photo take
 }
 // Converts image to canvas; returns new canvas element
 function convertImageToCanvas(image) {
@@ -94,7 +94,7 @@ function imageToServerAJAX() {
             	var deleteLink = document.createElement("A");
             	deleteLink.href = "delete.php?imageID=" + jsonResponse.imageID;
             	var deleteImage = document.createElement("img");
-            	deleteImage.src = 'images/del.png';
+            	deleteImage.src = 'files/sources/del.png';
             	deleteImage.className = 'delete-image';
             	deleteLink.appendChild(deleteImage);
             	//adding all to a side section
@@ -110,14 +110,14 @@ function imageToServerAJAX() {
 	            // 		$('<a>').attr({href: "image-page.php?imageID=" + jsonResponse.imageID}).append(
 		           //  		$('<img>').attr({src: jsonResponse.imagePath, class: "user-images"}))).append(
 		           //  	$('<a>').attr({href: "delete.php?imageID=" + jsonResponse.imageID}).append(
-		           //  		$('<img>').attr({src: "images/del.png", class: "delete-image"})))
+		           //  		$('<img>').attr({src: "files/sources/del.png", class: "delete-image"})))
             	// );
             }
     	};
 		new_image.onload = function() {
         	data = new FormData();
         	data.append('image', new_image.src);
-	        xmlhttp.open("POST", "save-image.php", true);
+	        xmlhttp.open("POST", "/save-image", true);
 	        xmlhttp.send(data);
 		}
 }

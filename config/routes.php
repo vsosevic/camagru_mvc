@@ -1,6 +1,7 @@
 <?php
 return array(
     // 'news/([a-z]+)/([0-9]+)' => 'news/view/$1/$2', //actionView in NewsController
+    'save-image' => 'gallery/saveImage', //actionSaveImage in GalleryController
     'gallery' => 'gallery/index', //actionIndex in GalleryController
     'my-camagru' => 'user/index', //actionIndex in UserController
     'signup' => 'user/signup', //actionSignup in UserController

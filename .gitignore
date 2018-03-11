@@ -5,3 +5,5 @@
 .DS*
 old_root_localhost/.htaccess
 old_root_localhost/index.php
+
+files/gallery
