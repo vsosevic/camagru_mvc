@@ -11,8 +11,9 @@ class UserController
     public function actionIndex()
     {
 
-
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/index.php');
+        include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
     }
@@ -54,7 +55,10 @@ class UserController
                 }
             }
         }
+
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/signup.php');
+        include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
     }
@@ -73,7 +77,10 @@ class UserController
             else {
                 $errmsg = "Invalid validation key!";
             }
+
+            include_once (ROOT . '/views/layouts/header.php');
             require_once(ROOT . '/views/user/validate.php');
+            include_once (ROOT . '/views/layouts/footer.php');
         }
 
         return true;
@@ -101,13 +108,17 @@ class UserController
             }
         }
 
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/login.php');
+        include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
     }
 
     public function actionForgot() {
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/forgot.php');
+        include_once (ROOT . '/views/layouts/footer.php');
     }
 
     public function actionForgotReset($email = NULL) {
@@ -138,7 +149,9 @@ class UserController
             }
         }
 
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/forgot-reset.php');
+        include_once (ROOT . '/views/layouts/footer.php');
     }
 
     public function actionLogout() {
@@ -195,7 +208,9 @@ class UserController
 
         $user = new User($_SESSION['logged_id_user']);
 
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/settings.php');
+        include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
     }

@@ -16,7 +16,9 @@ class GalleryController
     public function actionIndex()
     {
 
+        include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/gallery/index.php');
+        include_once (ROOT . '/views/layouts/footer.php');
 
         $db = DBConnection::getConnection();
         $q = $db->query('SELECT * FROM users')->fetchAll();
