@@ -12,7 +12,7 @@
 <header class="header-menu">
     <a class="header-item" href="/my-camagru">myCamagru</a>
     <a class="header-item" href="/gallery">Gallery</a>
-    <?php if (isset($_SESSION) && !empty($_SESSION['logged'])): ?>
+    <?php if (isset($_SESSION) && !empty($_SESSION['logged_id_user'])): ?>
         <a class="header-item header-item-login-logout" href="/settings">Account settings</a>
         <a class="header-item-login-logout" href="/logout">Logout</a>
     <?php else: ?>

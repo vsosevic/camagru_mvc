@@ -1,4 +1,4 @@
-<?php if(empty($_SESSION['logged'])): ?>
+<?php if(empty($_SESSION['logged_id_user'])): ?>
     <script type="text/javascript">
         window.location.href = '/login';
     </script>

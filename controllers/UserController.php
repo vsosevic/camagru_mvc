@@ -130,7 +130,7 @@ class UserController
             if (User::password_is_complex($_POST['new-password'])) {
                 User::change_password_by_reset_key($_POST['new-password'], $_POST['reset-key']);
                 $message = "Password changed successfully!";
-                $message .= empty($_SESSION['logged']) ?  "Now you can try to <a href='/login'>Login</a>" : '';
+                $message .= empty($_SESSION['logged_id_user']) ?  "Now you can try to <a href='/login'>Login</a>" : '';
             }
             else {
                 $errmsg = "Password should be at least 8 characters long, has 1 number and 1 character.";

@@ -12,7 +12,7 @@
         <div class="errmsg">
             <?php echo $err_msg; ?>
         </div>
-    <?php elseif(isset($_SESSION['logged'])): ?>
+    <?php elseif(isset($_SESSION['logged_id_user'])): ?>
         <script type="text/javascript">
             window.location.href = '/my-camagru';
         </script>
