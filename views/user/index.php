@@ -31,7 +31,7 @@
     </div>
 
 
-<!--    <side class="side-camera" id='side-camera'>-->
+    <side class="side-camera" id='side-camera'>
 <!--        --><?php
 //        require('connect.php');
 //        $images = $connection->query("SELECT * FROM images WHERE userID='" . $_SESSION['UserID'] . "' ORDER BY ImageDate DESC");
@@ -39,7 +39,7 @@
 //            echo "<div class='div-image-and-del'><a href='image-page.php?imageID=". $image['Id'] ."'><img class='user-images' src='" . $image['ImagePath'] . "'></a><a href='delete.php?imageID=" . $image['Id'] . "'><img class='delete-image' src='files/sources/del.png'></div></a>";
 //        }
 //        ?>
-<!--    </side>-->
+    </side>
     <div style="clear: both;"></div>
 
 </main>

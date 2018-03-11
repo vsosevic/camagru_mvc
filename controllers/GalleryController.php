@@ -39,7 +39,7 @@ class GalleryController
         $id_user = $_SESSION['logged_id_user'];
         $success = file_put_contents($imagePath, $image);
         if ($success) {
-            $res = $db->query("INSERT INTO images(id_user, image_path) VALUES('$id_user','$imagePath')");
+            $db->query("INSERT INTO images(id_user, image_path) VALUES('$id_user','$imagePath')");
         }
         $saved_image = $db->query("SELECT id_image FROM images WHERE image_path='$imagePath'")->fetchObject();
         $json_response = array('imagePath' => $imagePath, 'imageID' => $saved_image->id_image);
