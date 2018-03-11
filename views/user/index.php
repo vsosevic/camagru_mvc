@@ -25,13 +25,11 @@
 
 
     <side class="side-camera" id='side-camera'>
-<!--        --><?php
-//        require('connect.php');
-//        $images = $connection->query("SELECT * FROM images WHERE userID='" . $_SESSION['UserID'] . "' ORDER BY ImageDate DESC");
-//        foreach ($images as $image) {
-//            echo "<div class='div-image-and-del'><a href='image-page.php?imageID=". $image['Id'] ."'><img class='user-images' src='" . $image['ImagePath'] . "'></a><a href='delete.php?imageID=" . $image['Id'] . "'><img class='delete-image' src='files/sources/del.png'></div></a>";
-//        }
-//        ?>
+        <?php
+        foreach ($user_images as $user_image) {
+            echo "<div class='div-image-and-del'><a href='gallery/image/". $user_image->id_user ."'><img class='user-images' src='" . $user_image->image_path . "'></a><a href='gallery/image/delete/" . $user_image->id_user . "'><img class='delete-image' src='files/sources/del.png'></div></a>";
+        }
+        ?>
     </side>
     <div style="clear: both;"></div>
 

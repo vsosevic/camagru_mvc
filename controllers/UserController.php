@@ -1,6 +1,7 @@
 <?php
 
 include_once ROOT . '/models/User.php';
+include_once ROOT . '/models/Gallery.php';
 
 /**
 * 
@@ -14,6 +15,8 @@ class UserController
             header('location: /login');
             return;
         }
+
+        $user_images = Gallery::getAllImagesUserImages($_SESSION['logged_id_user']);
 
         include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/index.php');
