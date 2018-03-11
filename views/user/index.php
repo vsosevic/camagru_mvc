@@ -1,10 +1,3 @@
-<?php if(empty($_SESSION['logged_id_user'])): ?>
-    <script type="text/javascript">
-        window.location.href = '/login';
-    </script>
-<?php endif; ?>
-
-
 <script type="text/javascript" src="js/script.js"></script>
 <main class="main-camera">
 

@@ -10,6 +10,10 @@ class UserController
 
     public function actionIndex()
     {
+        if (empty($_SESSION['logged_id_user'])) {
+            header('location: /login');
+            return;
+        }
 
         include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/user/index.php');
@@ -165,6 +169,11 @@ class UserController
 
     public function actionSettings()
     {
+        if (empty($_SESSION['logged_id_user'])) {
+            header('location: /login');
+            return;
+        }
+
         if (!empty($_POST['email']) && !empty($_POST['username'])) {
             $db = DBConnection::getConnection();
 

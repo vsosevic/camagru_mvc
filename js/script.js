@@ -85,14 +85,14 @@ function imageToServerAJAX() {
             	divImageAndDel.className = 'div-image-and-del';
             	//a link to an image
             	var savedImageLink = document.createElement("A");
-            	savedImageLink.href = "image-page.php?imageID=" + jsonResponse.imageID;
+            	savedImageLink.href = "gallery/image/" + jsonResponse.imageID;
             	var savedImage = document.createElement("img");
             	savedImage.src = jsonResponse.imagePath;
             	savedImage.className = 'user-images';
             	savedImageLink.appendChild(savedImage);
             	//link to a del btn
             	var deleteLink = document.createElement("A");
-            	deleteLink.href = "delete.php?imageID=" + jsonResponse.imageID;
+            	deleteLink.href = "gallery/image/delete/" + jsonResponse.imageID;
             	var deleteImage = document.createElement("img");
             	deleteImage.src = 'files/sources/del.png';
             	deleteImage.className = 'delete-image';

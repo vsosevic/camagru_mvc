@@ -1,9 +1,3 @@
-<?php if(empty($_SESSION['logged_id_user'])): ?>
-    <script type="text/javascript">
-        window.location.href = '/login';
-    </script>
-<?php endif; ?>
-
 <form method="post" action="settings">
     <h2>Settings</h2>
 
