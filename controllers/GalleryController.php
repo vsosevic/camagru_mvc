@@ -28,6 +28,8 @@ class GalleryController
     public function actionImage($id_image) {
 	    if (!empty($id_image)) {
             $image = $this->db->query("SELECT * FROM images WHERE id_image=$id_image")->fetchObject();
+            $comments = $this->db->query("SELECT * FROM comments INNER JOIN users ON comments.id_user=users.id_user WHERE id_image=$id_image")->fetchAll(PDO::FETCH_OBJ);
+            $likes = $this->db->query("SELECT * FROM likes WHERE id_image=$id_image")->rowCount();
         }
 
         include_once (ROOT . '/views/layouts/header.php');
