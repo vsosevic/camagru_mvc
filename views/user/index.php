@@ -27,7 +27,9 @@
     <side class="side-camera" id='side-camera'>
         <?php
         foreach ($user_images as $user_image) {
-            echo "<div class='div-image-and-del'><a href='gallery/image/". $user_image->id_user ."'><img class='user-images' src='" . $user_image->image_path . "'></a><a href='gallery/image/delete/" . $user_image->id_user . "'><img class='delete-image' src='files/sources/del.png'></div></a>";
+            echo "<div class='div-image-and-del'><a href='gallery/image/" . $user_image->id_image
+                . "'><img class='user-images' src='" . $user_image->image_path . "'></a><a href='/image/delete/" . $user_image->id_image
+                . "'><img class='delete-image' src='files/sources/del.png'></div></a>";
         }
         ?>
     </side>

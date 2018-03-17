@@ -92,7 +92,7 @@ function imageToServerAJAX() {
             	savedImageLink.appendChild(savedImage);
             	//link to a del btn
             	var deleteLink = document.createElement("A");
-            	deleteLink.href = "gallery/image/delete/" + jsonResponse.imageID;
+            	deleteLink.href = "image/delete/" + jsonResponse.imageID;
             	var deleteImage = document.createElement("img");
             	deleteImage.src = 'files/sources/del.png';
             	deleteImage.className = 'delete-image';
