@@ -2,9 +2,9 @@
     <div class="image-overview">
         <img src="<?php echo $image->image_path ?>">
         <div class="likes-number-btn">
-            <span id="number-of-likes" style="font-size: 30px;"><?php echo $likes; ?></span>
-            <a href="#" id="like" hidden disabled><img src="/files/sources/like.png" width="50"></a>
-            <a href="#" id="unlike"><img style="background: lightblue; border-radius: 30px;" src="/files/sources/like.png" width="50"></a>
+            <span id="number-of-likes" style="font-size: 30px;"><?php echo $number_of_likes; ?></span>
+            <a href="#" id="like" <?php if ($is_liked) { echo 'style="display: none"'; } ?>><img src="/files/sources/like.png" width="50"></a>
+            <a href="#" id="unlike" <?php if (!$is_liked) { echo 'style="display: none"'; } ?>><img style="background: lightblue; border-radius: 30px;" src="/files/sources/like.png" width="50"></a>
         </div>
 
         <!-- Pluso BEGIN -->
@@ -44,4 +44,4 @@
     <div style="clear: both;"></div>
 </div>
 
-<script type="text/javascript" src="js/like.js"></script>
+<script type="text/javascript" src="/js/like.js"></script>

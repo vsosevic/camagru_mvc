@@ -26,14 +26,22 @@ class GalleryController
     }
 
     public function actionImage($id_image) {
-	    if (!empty($id_image)) {
-            $image = $this->db->query("SELECT * FROM images WHERE id_image=$id_image")->fetchObject();
-            $comments = $this->db->query("SELECT * FROM comments INNER JOIN users ON comments.id_user=users.id_user WHERE id_image=$id_image")->fetchAll(PDO::FETCH_OBJ);
-            $likes = $this->db->query("SELECT * FROM likes WHERE id_image=$id_image")->rowCount();
-        }
+	    $id_image = (int) $id_image;
+        $image = Gallery::getImageByID($id_image);
 
         include_once (ROOT . '/views/layouts/header.php');
-        require_once(ROOT . '/views/gallery/image.php');
+
+        if (!empty($image)) {
+            $comments = Gallery::getCommentsForImage($id_image);
+            $number_of_likes = Gallery::getNumberOfLikesForImage($id_image);
+            $is_liked = Gallery::imageIsLikedByCurrentUser($id_image);
+
+            require_once(ROOT . '/views/gallery/image.php');
+        }
+        else {
+            echo "There is no image with that ID";
+        }
+
         include_once (ROOT . '/views/layouts/footer.php');
     }
 
