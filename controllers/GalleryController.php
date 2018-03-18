@@ -76,4 +76,30 @@ class GalleryController
         header("Location: /my-camagru");
     }
 
+    public function actionImageLike($id_image) {
+
+        if (empty($id_image) || empty($_SESSION['logged_id_user'])) {
+            echo json_encode(['error' => "Sign in to be able to like"]);
+            return;
+        }
+
+        $id_user = $_SESSION['logged_id_user'];
+
+        $user_liked_image = Gallery::userLikedImage($id_user, $id_image);
+
+	    if ($user_liked_image) {
+	        $this->db->query("DELETE FROM likes WHERE id_user=$id_user AND id_image=$id_image");
+        }
+        else {
+            $this->db->query("INSERT INTO likes(id_user, id_image) VALUES ('$id_user', '$id_image')");
+        }
+
+	    $response = [];
+
+	    $response['number_of_likes'] = Gallery::getNumberOfLikesForImage($id_image);
+	    $response['like_change'] = $user_liked_image ? -1 : 1; // If liked now it is dislike.
+
+	    echo json_encode($response);
+    }
+
 }

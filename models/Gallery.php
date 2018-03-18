@@ -58,13 +58,26 @@ class Gallery
 
     public static function imageIsLikedByCurrentUser($id_image) {
         $db = DBConnection::getConnection();
-        $logged_user_id = $_SESSION['logged_id_user'];
+        $logged_user_id = !empty($_SESSION['logged_id_user']) ? $_SESSION['logged_id_user'] : 0;
 
         $number_of_likes = $db->query("SELECT * FROM likes WHERE id_user=$logged_user_id AND id_image=$id_image")
             ->rowCount();
 
         if ($number_of_likes == 0) {
             return false;
+        }
+
+        return true;
+    }
+
+    public static function userLikedImage($id_user, $id_image) {
+	    $db = DBConnection::getConnection();
+
+	    $liked = $db->query("SELECT * FROM likes WHERE id_user=$id_user AND id_image=$id_image")
+            ->rowCount();
+
+	    if ($liked == 0) {
+	        return false;
         }
 
         return true;

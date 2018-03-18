@@ -2,6 +2,7 @@
 return array(
     // 'news/([a-z]+)/([0-9]+)' => 'news/view/$1/$2', //actionView in NewsController
     'save-image' => 'gallery/saveImage', //actionSaveImage in GalleryController
+    'image/([0-9]+)/like' => 'gallery/imageLike/$1', //actionImageLike in GalleryController
     'image/delete/([0-9]+)' => 'gallery/imageDelete/$1', //actionImageDelete in GalleryController
     'gallery/image/([0-9]+)' => 'gallery/image/$1', //actionImage in GalleryController
     'gallery' => 'gallery/index', //actionIndex in GalleryController
