@@ -111,7 +111,6 @@ class GalleryController
 	    $logged_id_user = $_SESSION['logged_id_user'];
 
 	    if (!empty($comment_text) && $user_image_owner && $logged_id_user && $user_image_owner->receive_notifications) {
-//	        $db->query("INSERT INTO comments (id_user, id_image, comment) VALUES ('$logged_id_user', '$id_image', '$comment_text')");
             $query = $db->prepare("INSERT INTO comments (id_user, id_image, comment) VALUES ('$logged_id_user', '$id_image', ?)");
             $query->execute(array($comment_text));
         }

@@ -204,7 +204,9 @@ class UserController
                 //do nothing
             }
             else if (!User::username_occupied($username)) {
-                $db->query("UPDATE users SET username='$username' WHERE id_user=$id_user");
+                $query = $db->prepare("UPDATE users SET username=? WHERE id_user=$id_user");
+                $query->execute(array($username));
+
                 $message .= "Username changed successfully! <br>";
             }
             else {
@@ -217,7 +219,6 @@ class UserController
             }
 
         }
-
         $user = new User($_SESSION['logged_id_user']);
 
         include_once (ROOT . '/views/layouts/header.php');

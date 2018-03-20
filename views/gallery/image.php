@@ -26,7 +26,7 @@
         <div class="comments">
             <?php foreach ($comments as $comment): ?>
                 <div class="comment">
-                    <span class="comment-user-name"><?php echo $comment->username . ": " ?></span>
+                    <span class="comment-user-name"><?php echo htmlentities($comment->username) . ": " ?></span>
                     <span><?php echo htmlentities($comment->comment); ?></span>
                     <br />
                     <span class="comment-date"><?php echo $comment->date ?></span>
