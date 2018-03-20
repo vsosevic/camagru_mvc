@@ -83,5 +83,13 @@ class Gallery
         return true;
     }
 
+    public static function getImageOwnerUserId($id_image) {
+	    $db = DBConnection::getConnection();
+
+	    $id_user = $db->query("SELECT id_user FROM images WHERE id_image=$id_image")->fetchColumn();
+
+	    return $id_user;
+    }
+
 
 }

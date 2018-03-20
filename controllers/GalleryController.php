@@ -1,6 +1,7 @@
 <?php
 
 include_once ROOT . '/models/Gallery.php';
+include_once ROOT . '/models/User.php';
 
 /**
 * 
@@ -100,6 +101,22 @@ class GalleryController
 	    $response['like_change'] = $user_liked_image ? -1 : 1; // If liked now it is dislike.
 
 	    echo json_encode($response);
+    }
+
+    public function actionImageComment($id_image) {
+	    $db = DBConnection::getConnection();
+	    $comment_text = $_POST['comment-text'];
+	    $image_owner_id = Gallery::getImageOwnerUserId($id_image);
+	    $user_image_owner = new User($image_owner_id);
+	    $logged_id_user = $_SESSION['logged_id_user'];
+
+	    if (!empty($comment_text) && $user_image_owner && $logged_id_user && $user_image_owner->receive_notifications) {
+//	        $db->query("INSERT INTO comments (id_user, id_image, comment) VALUES ('$logged_id_user', '$id_image', '$comment_text')");
+            $query = $db->prepare("INSERT INTO comments (id_user, id_image, comment) VALUES ('$logged_id_user', '$id_image', ?)");
+            $query->execute(array($comment_text));
+        }
+
+        header("Location: /gallery/image/$id_image");
     }
 
 }
