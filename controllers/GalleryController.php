@@ -17,13 +17,20 @@ class GalleryController
 
     public function actionIndex()
     {
-        $images = Gallery::getAllImages();
+        $images = Gallery::getImagesWithOffset(0);
 
         include_once (ROOT . '/views/layouts/header.php');
         require_once(ROOT . '/views/gallery/index.php');
         include_once (ROOT . '/views/layouts/footer.php');
 
         return true;
+    }
+
+    public function actionLoadMoreImages($scrolled_page) {
+	    $images = Gallery::getImagesWithOffset($scrolled_page);
+
+	    $response_images = json_encode($images);
+        echo $response_images;
     }
 
     public function actionImage($id_image) {
@@ -110,9 +117,13 @@ class GalleryController
 	    $user_image_owner = new User($image_owner_id);
 	    $logged_id_user = $_SESSION['logged_id_user'];
 
-	    if (!empty($comment_text) && $user_image_owner && $logged_id_user && $user_image_owner->receive_notifications) {
+	    if (!empty($comment_text) && $user_image_owner && $logged_id_user) {
             $query = $db->prepare("INSERT INTO comments (id_user, id_image, comment) VALUES ('$logged_id_user', '$id_image', ?)");
             $query->execute(array($comment_text));
+
+            if ($user_image_owner->receive_notifications) {
+                // !!!!!! Send the mail to the user!!!!!!!!
+            }
         }
 
         header("Location: /gallery/image/$id_image");

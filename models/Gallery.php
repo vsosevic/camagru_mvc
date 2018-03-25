@@ -29,6 +29,17 @@ class Gallery
         return $images;
     }
 
+    public static function getImagesWithOffset($scrolled_page) {
+        $db = DBConnection::getConnection();
+        $limit = 12;
+        $offset = $scrolled_page * $limit;
+
+        $images = $db->query("SELECT * FROM images ORDER BY image_date DESC LIMIT $limit OFFSET $offset ")
+            ->fetchAll(PDO::FETCH_OBJ);
+
+        return $images;
+    }
+
     public static function getImageByID($id_image) {
         $db = DBConnection::getConnection();
 

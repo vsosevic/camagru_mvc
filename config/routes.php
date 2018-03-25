@@ -5,6 +5,7 @@ return array(
     'image/([0-9]+)/like' => 'gallery/imageLike/$1', //actionImageLike in GalleryController
     'image/([0-9]+)/comment' => 'gallery/imageComment/$1', //actionImageComment in GalleryController
     'image/delete/([0-9]+)' => 'gallery/imageDelete/$1', //actionImageDelete in GalleryController
+    'load-more-images' => 'gallery/loadMoreImages', //actionLoadMoreImages in GalleryController
     'gallery/image/([0-9]+)' => 'gallery/image/$1', //actionImage in GalleryController
     'gallery' => 'gallery/index', //actionIndex in GalleryController
     'my-camagru' => 'user/index', //actionIndex in UserController
