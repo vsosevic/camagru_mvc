@@ -37,7 +37,7 @@
             <span class='errmsg' style='width: 100%; text-align: center;'>To leave comments and be able to like you must be logged in!</span>
         <?php else: ?>
             <form style="text-align: left" method="post" action="/image/<?php echo $image->id_image; ?>/comment" id="comment-form">
-                <input type="text" name="comment-text" placeholder="Write a new comment" required="" style="width: 95%;">
+                <input type="text" name="comment-text" placeholder="Write a new comment" required="" style="width: 95%;" autofocus>
             </form>
         <?php endif; ?>
     </div>
