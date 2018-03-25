@@ -122,7 +122,12 @@ class GalleryController
             $query->execute(array($comment_text));
 
             if ($user_image_owner->receive_notifications) {
-                // !!!!!! Send the mail to the user!!!!!!!!
+                $email = $user_image_owner->email;
+                $username = $user_image_owner->username;
+                $image_link = $_SERVER['HTTP_ORIGIN'] . "/gallery/image/$id_image";
+                $mailSubject = "New comment for your photo";
+                $mailBody = "Hi, $username!\n\n You have a new comment to your image. To see it goto: $image_link";
+                mail($email, $mailSubject, $mailBody);
             }
         }
 
