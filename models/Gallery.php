@@ -31,7 +31,7 @@ class Gallery
 
     public static function getImagesWithOffset($scrolled_page) {
         $db = DBConnection::getConnection();
-        $limit = 12;
+        $limit = 8;
         $offset = $scrolled_page * $limit;
 
         $images = $db->query("SELECT * FROM images ORDER BY image_date DESC LIMIT $limit OFFSET $offset ")
