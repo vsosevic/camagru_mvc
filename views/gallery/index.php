@@ -17,8 +17,6 @@
 
         // if only 20px of content is not shown yet, load more content.
         if( bodyHeight - 20 <= windowScrollTop + windowHeight) {
-            console.log("scrolled");
-
             var xmlhttp1 = new XMLHttpRequest();
             xmlhttp1.onreadystatechange = function() {
                 if (this.readyState == 4 && this.status == 200) {
