@@ -182,11 +182,11 @@ input[type=submit].login {
 	vertical-align: top;
 	
 }
-/*.comments {
+.comments {
 	max-height: 500px;
 	overflow: scroll;
 	overflow-x: hidden;
-}*/
+}
 .comment-user-name {
 	color: #365899;
 }

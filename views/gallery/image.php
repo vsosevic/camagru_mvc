@@ -7,8 +7,9 @@
             <a href="#" id="unlike" <?php if (!$is_liked) { echo 'style="display: none"'; } ?>><img style="background: lightblue; border-radius: 30px;" src="/files/sources/like.png" width="50"></a>
         </div>
 
-        <!-- Pluso BEGIN -->
-        <script type="text/javascript">(function() {
+        <script type="text/javascript">
+            <!-- Pluso BEGIN -->
+            (function() {
                 if (window.pluso)if (typeof window.pluso.start == "function") return;
                 if (window.ifpluso==undefined) { window.ifpluso = 1;
                     var d = document, s = d.createElement('script'), g = 'getElementsByTagName';
@@ -16,14 +17,23 @@
                     s.src = ('https:' == window.location.protocol ? 'https' : 'http')  + '://share.pluso.ru/pluso-like.js';
                     var h=d[g]('body')[0];
                     h.appendChild(s);
-                }})();</script>
+                }})();
+            <!-- Pluso END -->
+
+            //For scrolling to the bottom comment.
+            window.addEventListener('load', documentReady, false);
+            function documentReady()
+            {
+                var objDiv = document.getElementById("comments");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
+        </script>
         <div class="pluso" data-background="transparent" data-options="small,square,line,horizontal,counter,theme=04" data-services="facebook,google,email,print"></div>
-        <!-- Pluso END -->
 
     </div>
 
     <div style="display: inline-block;" class="comments-block">
-        <div class="comments">
+        <div class="comments" id="comments">
             <?php foreach ($comments as $comment): ?>
                 <div class="comment">
                     <span class="comment-user-name"><?php echo htmlentities($comment->username) . ": " ?></span>
