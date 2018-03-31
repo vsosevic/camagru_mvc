@@ -1,11 +1,13 @@
 <form method="post" action="settings">
     <h2>Settings</h2>
 
-    <label for="username">Username</label>
+    <label for="username">Username:</label>
+    <br />
     <input type="text" name="username" placeholder="User Name" value="<?PHP if (isset($user->username)) { echo $user->username; } ?>" required />
     <br />
 
     <label for="email">Email</label>
+    <br />
     <input type="email" name="email" placeholder="Email" value="<?PHP if (isset($user->email)) { echo $user->email; } ?>" required />
     <br />
 
