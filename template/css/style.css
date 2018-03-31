@@ -7,7 +7,7 @@ section,
 }
 
 .header-menu {
-	background-color: lightblue;
+	background-color: #447b36;
 	text-align: center;
 	width: 100%;
 	height: auto;
@@ -20,6 +20,7 @@ section,
 	text-decoration: none;
 	padding: 10px 20px;
 	margin: 10px 20px;
+	border-radius: 5px;
 }
 .header-item:hover {
 	background-color: black;
@@ -119,7 +120,7 @@ video, #frame {
 	margin: 1px;
 }
 .user-images-gallery {
-	width: 600px;
+	width: 500px;
 	height: auto;
 	margin: 2px;
 }
@@ -131,6 +132,7 @@ video, #frame {
 	background: lightpink;
 	padding: 5px 10px;
 	margin-top: 10px;
+	border-radius: 5px;
 }
 .message {
 	background-color: lightgreen;
@@ -148,7 +150,7 @@ input {
 	outline: none;
 }
 input:focus {
-	background-color: lightblue;
+	background-color: #86e88a;
 }
 input[type=submit].login {
 	padding: 10px 40px;
@@ -178,7 +180,7 @@ input[type=submit].login {
 	padding: 20px 0px 20px 20px;
 	position: relative;
 	border-radius: 3px;
-	max-width: 600px;
+	max-width: 800px;
 	vertical-align: top;
 	
 }

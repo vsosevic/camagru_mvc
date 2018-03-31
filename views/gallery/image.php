@@ -43,14 +43,16 @@
                 </div>
             <?php endforeach; ?>
         </div>
+        <div>
         <?php if (!isset($_SESSION['logged_id_user'])): ?>
-            <span class='errmsg' style='width: 100%; text-align: center;'>To leave comments and be able to like you must be logged in!</span>
+            <span class='errmsg'>To leave comments and be able to like you must be logged in!</span>
         <?php else: ?>
             <form style="text-align: left" method="post" action="/image/<?php echo $image->id_image; ?>/comment" id="comment-form">
                 <input type="text" name="comment-text" placeholder="Write a new comment" required="" style="width: 95%;" autofocus>
                 <input type="submit" value="Comment">
             </form>
         <?php endif; ?>
+        </div>
     </div>
     <div style="clear: both;"></div>
 </div>
